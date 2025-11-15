@@ -1,8 +1,12 @@
+using Amazon.DynamoDBv2.DataModel;
+
 namespace EmailApp.Models
 {
+    [DynamoDBTable("Emails")]
     public class Email
     {
-        public int Id { get; set; }
+        [DynamoDBHashKey]
+        public string Id { get; set; }
         public string Topic { get; set; }
         public string Text { get; set; }
         public string FileId { get; set; }

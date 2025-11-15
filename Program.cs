@@ -1,7 +1,14 @@
+using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.DataModel;
+using EmailApp.Repository;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddAWSService<IAmazonDynamoDB>();       // DynamoDB client
+builder.Services.AddSingleton<IDynamoDBContext, DynamoDBContext>();  // context
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 var app = builder.Build();
 

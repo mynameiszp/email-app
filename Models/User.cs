@@ -1,8 +1,12 @@
+using Amazon.DynamoDBv2.DataModel;
+
 namespace EmailApp.Models
-{
+{    
+    [DynamoDBTable("Users")]
     public class User
     {
-        public int Id { get; set; }
+        [DynamoDBHashKey]
+        public string Id { get; set; }
         public string UserName { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
