@@ -1,5 +1,6 @@
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
+using Amazon.Extensions.NETCore.Setup;
 using EmailApp.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,12 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddAWSService<IAmazonDynamoDB>();       // DynamoDB client
 builder.Services.AddSingleton<IDynamoDBContext, DynamoDBContext>();  // context
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+builder.Services.AddDefaultAWSOptions(new AWSOptions
+{
+    Profile = "EmailAppUser",
+    Region = Amazon.RegionEndpoint.EUCentral1
+});
 
 var app = builder.Build();
 
